@@ -1,0 +1,9 @@
+/node_modules
+/.vscode
+/.next
+
+
+# environment files
+.env
+*.env
+.env.*
