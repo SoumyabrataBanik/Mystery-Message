@@ -10,6 +10,20 @@ export async function POST(request: Request): Promise<Response> {
     try {
         const { userName, email, password } = await request.json();
 
+        if (
+            !userName ||
+            !email ||
+            !password ||
+            userName.trim() === "" ||
+            email.trim() === "" ||
+            password.trim() === ""
+        ) {
+            return Response.json({
+                success: false,
+                message: "All fields are required!",
+            });
+        }
+
         const existingUserVerifiedByUsername = await UserModel.findOne({
             userName,
             isVerified: true,
@@ -76,6 +90,7 @@ export async function POST(request: Request): Promise<Response> {
             await newUser.save();
         }
 
+        console.log("new user found");
         // Send Verification Email
         const verificationEmail = await sendVerificationEmail(
             email,
