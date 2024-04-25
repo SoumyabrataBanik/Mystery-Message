@@ -30,7 +30,6 @@ export async function POST(request: Request): Promise<Response> {
         });
 
         if (existingUserVerifiedByUsername) {
-            console.error("User already exists.");
             return Response.json(
                 {
                     success: false,
@@ -90,7 +89,6 @@ export async function POST(request: Request): Promise<Response> {
             await newUser.save();
         }
 
-        console.log("new user found");
         // Send Verification Email
         const verificationEmail = await sendVerificationEmail(
             email,
@@ -120,7 +118,6 @@ export async function POST(request: Request): Promise<Response> {
             }
         );
     } catch (error) {
-        console.error("Error while registering user.", error);
         return Response.json(
             {
                 success: false,
