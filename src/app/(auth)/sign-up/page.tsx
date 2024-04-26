@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 import Link from "next/link";
 import axios, { AxiosError } from "axios";
@@ -15,7 +15,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -25,7 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 
-const SignInPage = function () {
+const SignInPage = function() {
     const [userName, setUserName] = useState<string>("");
     const [usernameMessage, setUsernameMessage] = useState<string>("");
     const [isCheckingUsername, setIsCheckingUsername] =
@@ -62,7 +61,7 @@ const SignInPage = function () {
                     const axiosError = error as AxiosError<ApiResponse>;
                     setUsernameMessage(
                         axiosError?.response?.data?.message ??
-                            "Error Checking username😔"
+                        "Error Checking username😔"
                     );
                 } finally {
                     setIsCheckingUsername(false);
@@ -72,7 +71,7 @@ const SignInPage = function () {
         checkUsernameUnique();
     }, [userName]);
 
-    const onSubmitHandler = async function (
+    const onSubmitHandler = async function(
         data: z.infer<typeof signUpSchema>
     ) {
         setIsSubmitting(true);
